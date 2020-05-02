@@ -1,17 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import {createStore} from 'redux'
+// import Counter from "./components/basic/Counter";
+import counter from './reducers'
+import RenderApp from "./todos";
+// import App from './App';
+// import App from './components/basic/Basic';
+// import App from './components/basic/Basic_syntax';
+// import App from './components/react-redux/Index';
+//  import App from './App';
+const store = createStore(counter);
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+{/*<Counter  value={store.getState()}
+              onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
+              onDecrement={() => store.dispatch({ type: 'DECREMENT' })} />,*/}
+
+const render = () => ReactDOM.render(
+    <RenderApp/>,
+    document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+render();
+store.subscribe(render);
